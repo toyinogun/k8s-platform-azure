@@ -1,8 +1,26 @@
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-azure-upbound
+  name: provider-azure-resource
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  package: xpkg.upbound.io/upbound/provider-family-azure:v1.0.0
+  package: xpkg.upbound.io/upbound/provider-azure-resource:v1.0.0
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-azure-network
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  package: xpkg.upbound.io/upbound/provider-azure-network:v1.0.0
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-azure-containerservice
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  package: xpkg.upbound.io/upbound/provider-azure-containerservice:v1.0.0
