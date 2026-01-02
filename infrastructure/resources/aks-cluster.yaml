@@ -1,0 +1,56 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: aks-vnet
+  namespace: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  forProvider:
+    addressSpace: ["10.0.0.0/16"]
+    location: EastUS
+    resourceGroupNameRef:
+      name: my-crossplane-rg
+  providerConfigRef:
+    name: default
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: aks-subnet
+  namespace: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  forProvider:
+    addressPrefixes: ["10.0.1.0/24"]
+    resourceGroupNameRef:
+      name: my-crossplane-rg
+    virtualNetworkNameRef:
+      name: aks-vnet
+  providerConfigRef:
+    name: default
+---
+apiVersion: containerservice.azure.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  name: my-aks-cluster
+  namespace: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  forProvider:
+    location: EastUS
+    resourceGroupNameRef:
+      name: my-crossplane-rg
+    dnsPrefix: my-aks-controlplane
+    defaultNodePool:
+      - name: default
+        nodeCount: 1
+        vmSize: Standard_B2s
+        vnetSubnetIdRef:
+          name: aks-subnet
+    identity:
+      - type: SystemAssigned
+  providerConfigRef:
+    name: default
