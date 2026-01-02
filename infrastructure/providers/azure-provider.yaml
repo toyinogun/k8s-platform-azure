@@ -5,4 +5,4 @@ metadata:
 spec:
   # This is the monolithic provider family which includes everything.
   # For production, you might optimize by using specific families (e.g., provider-azure-compute).
-  package: xpkg.upbound.io/upbound/provider-azure:v1.3.1
+  package: xpkg.upbound.io/upbound/provider-azure:v2.3.0
