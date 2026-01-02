@@ -2,7 +2,9 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   name: my-crossplane-rg
-  namespace: crossplane-system # Resources are cluster-scoped, but claims can be namespaced
+  namespace: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   forProvider:
     location: EastUS
