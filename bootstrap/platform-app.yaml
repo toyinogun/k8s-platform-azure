@@ -11,7 +11,6 @@ spec:
     repoURL: https://github.com/toyinogun/k8s-platform-azure.git
     targetRevision: main
     path: infrastructure
-    # This setting fixes the issue where ArgoCD sees an empty folder
     directory:
       recurse: true
   destination:
@@ -23,3 +22,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      # ADD THIS LINE:
+      - SkipDryRunOnMissingResource=true
