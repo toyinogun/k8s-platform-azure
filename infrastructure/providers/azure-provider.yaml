@@ -1,0 +1,8 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-azure-upbound
+spec:
+  # This is the monolithic provider family which includes everything.
+  # For production, you might optimize by using specific families (e.g., provider-azure-compute).
+  package: xpkg.upbound.io/upbound/provider-azure:v1.3.1

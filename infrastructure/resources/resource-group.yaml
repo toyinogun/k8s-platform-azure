@@ -1,0 +1,10 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: my-crossplane-rg
+  namespace: crossplane-system # Resources are cluster-scoped, but claims can be namespaced
+spec:
+  forProvider:
+    location: EastUS
+  providerConfigRef:
+    name: default
