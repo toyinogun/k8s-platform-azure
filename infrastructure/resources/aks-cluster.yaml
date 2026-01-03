@@ -48,8 +48,7 @@ spec:
       - name: default
         nodeCount: 1
         vmSize: Standard_DC2s_v3
-        vnetSubnetIdRef:
-          name: aks-subnet
+        vnetSubnetId: /subscriptions/.../virtualNetworks/aks-vnet/subnets/aks-subnet
     identity:
       - type: SystemAssigned
   providerConfigRef:
