@@ -47,7 +47,7 @@ spec:
     defaultNodePool:
       - name: default
         nodeCount: 1
-        vmSize: Standard_B2s
+        vmSize: Standard_DC2s_v3
         vnetSubnetIdRef:
           name: aks-subnet
     identity:
