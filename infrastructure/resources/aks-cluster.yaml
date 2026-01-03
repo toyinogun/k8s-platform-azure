@@ -47,15 +47,13 @@ spec:
       name: default
       nodeCount: 1
       vmSize: Standard_DC2s_v3
-      # IMPORTANT: must be the full Azure resource ID (no placeholders)
       vnetSubnetId: /subscriptions/9d4d069d-d03a-4639-9b34-fa963ddadd3b/resourceGroups/my-crossplane-rg/providers/Microsoft.Network/virtualNetworks/aks-vnet/subnets/aks-subnet
     identity:
       type: SystemAssigned
-    # IMPORTANT: avoid overlapping with your VNet (10.0.0.0/16)
     networkProfile:
       networkPlugin: azure
       loadBalancerSku: standard
-      serviceCidr: 10.2.0.0/16
+      serviceCidr: 10.2.0.0/16   # avoid overlap with 10.0.0.0/16 VNet
       dnsServiceIp: 10.2.0.10
       dockerBridgeCidr: 172.17.0.1/16
   providerConfigRef:
