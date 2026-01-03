@@ -45,7 +45,7 @@ spec:
     dnsPrefix: my-aks-controlplane
     defaultNodePool:
       name: default
-      nodeCount: 2
+      nodeCount: 1
       vmSize: Standard_DC2s_v3
       vnetSubnetId: /subscriptions/9d4d069d-d03a-4639-9b34-fa963ddadd3b/resourceGroups/my-crossplane-rg/providers/Microsoft.Network/virtualNetworks/aks-vnet/subnets/aks-subnet
     identity:
