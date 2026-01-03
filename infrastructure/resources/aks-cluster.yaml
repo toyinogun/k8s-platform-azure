@@ -1,29 +1,29 @@
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   name: aks-vnet
-  namespace: crossplane-system
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   forProvider:
-    addressSpace: ["10.0.0.0/16"]
+    addressSpace:
+      - 10.0.0.0/16
     location: EastUS
     resourceGroupNameRef:
       name: my-crossplane-rg
   providerConfigRef:
     name: default
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: aks-subnet
-  namespace: crossplane-system
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   forProvider:
-    addressPrefixes: ["10.0.1.0/24"]
+    addressPrefixes:
+      - 10.0.1.0/24
     resourceGroupNameRef:
       name: my-crossplane-rg
     virtualNetworkNameRef:
@@ -31,11 +31,10 @@ spec:
   providerConfigRef:
     name: default
 ---
-apiVersion: containerservice.azure.upbound.io/v1beta1
+apiVersion: containerservice.azure.upbound.io/v1beta2
 kind: KubernetesCluster
 metadata:
   name: my-aks-cluster
-  namespace: crossplane-system
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
@@ -45,11 +44,19 @@ spec:
       name: my-crossplane-rg
     dnsPrefix: my-aks-controlplane
     defaultNodePool:
-      - name: default
-        nodeCount: 1
-        vmSize: Standard_DC2s_v3
-        vnetSubnetId: /subscriptions/.../virtualNetworks/aks-vnet/subnets/aks-subnet
+      name: default
+      nodeCount: 1
+      vmSize: Standard_DC2s_v3
+      # IMPORTANT: must be the full Azure resource ID (no placeholders)
+      vnetSubnetId: /subscriptions/9d4d069d-d03a-4639-9b34-fa963ddadd3b/resourceGroups/my-crossplane-rg/providers/Microsoft.Network/virtualNetworks/aks-vnet/subnets/aks-subnet
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
+    # IMPORTANT: avoid overlapping with your VNet (10.0.0.0/16)
+    networkProfile:
+      networkPlugin: azure
+      loadBalancerSku: standard
+      serviceCidr: 10.2.0.0/16
+      dnsServiceIp: 10.2.0.10
+      dockerBridgeCidr: 172.17.0.1/16
   providerConfigRef:
     name: default
