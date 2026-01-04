@@ -54,7 +54,7 @@ spec:
       securityContext:
         fsGroup: 1001
       containers:
-        - image: bitnami/mariadb:latest
+        - image: bitnami/mariadb:11.8
           name: mysql
           env:
             - name: MARIADB_ROOT_PASSWORD
