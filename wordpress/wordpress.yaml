@@ -59,7 +59,7 @@ spec:
       securityContext:
         fsGroup: 1001
       containers:
-        - image: bitnami/wordpress:latest
+        - image: wordpress:6.9
           name: wordpress
           env:
             - name: MARIADB_HOST
