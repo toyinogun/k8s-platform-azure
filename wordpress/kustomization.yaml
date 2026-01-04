@@ -3,6 +3,5 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - secret.yaml
   - mysql.yaml
   - wordpress.yaml

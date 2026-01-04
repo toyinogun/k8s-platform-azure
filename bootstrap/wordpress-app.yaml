@@ -11,8 +11,6 @@ spec:
     repoURL: https://github.com/toyinogun/k8s-platform-azure.git
     targetRevision: main
     path: wordpress
-    directory:
-      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
