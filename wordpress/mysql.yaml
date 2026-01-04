@@ -54,8 +54,8 @@ spec:
       securityContext:
         fsGroup: 1001
       containers:
-        - image: bitnami/mariadb:sha256-1a319545fc9c1ce6930449f8d893acdce58d29e6c8aa3eb1538c5631ebbd3b32
-          name: mysql
+        - image: mariadb:11.8
+          name: mariadb
           env:
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
@@ -76,7 +76,8 @@ spec:
               name: mysql
           volumeMounts:
             - name: mysql-persistent-storage
-              mountPath: /bitnami/mariadb
+              mountPath: /var/lib/mysql
+              subPath: data
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
