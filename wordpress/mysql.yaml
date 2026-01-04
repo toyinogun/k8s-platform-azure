@@ -51,6 +51,8 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      securityContext:
+        fsGroup: 1001
       containers:
         - image: bitnami/mariadb:latest
           name: mysql

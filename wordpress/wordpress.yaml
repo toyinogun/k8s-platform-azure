@@ -51,6 +51,8 @@ spec:
         app: wordpress
         tier: frontend
     spec:
+      securityContext:
+        fsGroup: 1001
       containers:
         - image: bitnami/wordpress:latest
           name: wordpress
