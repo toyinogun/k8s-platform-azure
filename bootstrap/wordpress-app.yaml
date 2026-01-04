@@ -11,11 +11,6 @@ spec:
     repoURL: https://github.com/toyinogun/k8s-platform-azure.git
     targetRevision: main
     path: wordpress
-  ignoreDifferences:
-    - group: ""
-      kind: Secret
-      name: wordpress-secrets
-      namespace: wordpress
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
