@@ -1,0 +1,16 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: mycrossplanestore
+  namespace: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  forProvider:
+    location: EastUS
+    accountTier: Standard
+    accountReplicationType: LRS
+    resourceGroupNameRef:
+      name: my-crossplane-rg
+  providerConfigRef:
+    name: default
