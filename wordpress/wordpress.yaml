@@ -86,8 +86,8 @@ spec:
               name: http
           volumeMounts:
             - name: wordpress-persistent-storage
-              mountPath: /var/www/html
-              subPath: html
+              mountPath: /var/www/html/wp-content
+              subPath: html/wp-content
       volumes:
         - name: wordpress-persistent-storage
           persistentVolumeClaim:
